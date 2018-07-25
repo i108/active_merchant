@@ -238,6 +238,11 @@ class RemoteBarclaycardSmartpayTest < Test::Unit::TestCase
     # assert_failure response
   end
 
+  def test_successful_third_party_payout
+    response = @gateway.credit(@amount, @credit_card, @options_with_credit_fields.merge({third_party_payout: true}))
+    assert_success response
+  end
+
   def test_successful_void
     auth = @gateway.authorize(@amount, @credit_card, @options)
     assert_success auth
